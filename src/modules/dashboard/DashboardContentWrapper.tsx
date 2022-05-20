@@ -4,6 +4,7 @@ import { BorrowAssetsList } from './lists/BorrowAssetsList/BorrowAssetsList';
 import { BorrowedPositionsList } from './lists/BorrowedPositionsList/BorrowedPositionsList';
 import { SuppliedPositionsList } from './lists/SuppliedPositionsList/SuppliedPositionsList';
 import { SupplyAssetsList } from './lists/SupplyAssetsList/SupplyAssetsList';
+import { SupplyTransactionsList } from './lists/SupplyTransactionsList/SupplyTransactionsList';
 
 interface DashboardContentWrapperProps {
   isBorrow: boolean;
@@ -25,6 +26,8 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
       <Box sx={{ display: { xs: isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>
         <SuppliedPositionsList />
         <SupplyAssetsList />
+        {/* Entry point for the transactions list */}
+        <SupplyTransactionsList />
       </Box>
 
       <Box sx={{ display: { xs: !isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>

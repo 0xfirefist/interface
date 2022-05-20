@@ -131,6 +131,8 @@ msgstr "Already on cooldown"
 #: src/components/transactions/AssetInput.tsx
 #: src/components/transactions/Faucet/FaucetModalContent.tsx
 #: src/components/transactions/StakeRewardClaim/StakeRewardClaimModalContent.tsx
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionMobileListItem.tsx
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionsList.tsx
 msgid "Amount"
 msgstr "Amount"
 
@@ -654,6 +656,10 @@ msgstr "Enter an amount"
 msgid "Error connecting. Try refreshing the page."
 msgstr "Error connecting. Try refreshing the page."
 
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionsList.tsx
+msgid "Error fetching events"
+msgstr "Error fetching events"
+
 #: pages/governance/proposal/[proposalId].governance.tsx
 msgid "Executed"
 msgstr "Executed"
@@ -661,6 +667,11 @@ msgstr "Executed"
 #: src/modules/governance/FormattedProposalTime.tsx
 msgid "Expires"
 msgstr "Expires"
+
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionListItem.tsx
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionMobileListItem.tsx
+msgid "Explorer"
+msgstr "Explorer"
 
 #: src/ui-config/menu-items/index.tsx
 msgid "FAQ"
@@ -812,6 +823,11 @@ msgstr "Isolated assets have limited borrowing power and other assets cannot be 
 msgid "Language"
 msgstr "Language"
 
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionsList.tsx
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionsList.tsx
+msgid "Last 5 transactions"
+msgstr "Last 5 transactions"
+
 #: src/components/transactions/StakeCooldown/StakeCooldownModalContent.tsx
 #: src/modules/dashboard/LiquidationRiskParametresModal/LiquidationRiskParametresModal.tsx
 msgid "Learn more"
@@ -942,6 +958,10 @@ msgstr "New APY"
 #: src/components/transactions/StakeRewardClaim/StakeRewardClaimModalContent.tsx
 msgid "No rewards to claim"
 msgstr "No rewards to claim"
+
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionsList.tsx
+msgid "No transaction history"
+msgstr "No transaction history"
 
 #: src/components/transactions/GovVote/GovVoteModalContent.tsx
 msgid "No voting power"
@@ -1562,6 +1582,10 @@ msgstr "Total voting power"
 msgid "Total worth"
 msgstr "Total worth"
 
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionMobileListItem.tsx
+msgid "Transaction Hash"
+msgstr "Transaction Hash"
+
 #: src/components/transactions/FlowCommons/Error.tsx
 msgid "Transaction failed"
 msgstr "Transaction failed"
@@ -1569,6 +1593,10 @@ msgstr "Transaction failed"
 #: src/components/transactions/FlowCommons/TxModalDetails.tsx
 msgid "Transaction overview"
 msgstr "Transaction overview"
+
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionsList.tsx
+msgid "Tx Hash"
+msgstr "Tx Hash"
 
 #: src/components/transactions/GovDelegation/GovDelegationModalContent.tsx
 msgid "Type of delegation"
@@ -1953,6 +1981,8 @@ msgstr "withdrew"
 #: src/components/transactions/StakeCooldown/StakeCooldownModalContent.tsx
 #: src/components/transactions/StakeCooldown/StakeCooldownModalContent.tsx
 #: src/modules/dashboard/DashboardEModeButton.tsx
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionListItem.tsx
+#: src/modules/dashboard/lists/SupplyTransactionsList/SupplyTransactionMobileListItem.tsx
 #: src/modules/reserve-overview/ReserveTopDetails.tsx
 msgid "{0}"
 msgstr "{0}"

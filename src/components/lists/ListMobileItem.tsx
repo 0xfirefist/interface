@@ -1,5 +1,5 @@
 import { Box, Divider, Skeleton, Typography } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { CustomMarket } from 'src/ui-config/marketsConfig';
 
 import { Link, ROUTES } from '../primitives/Link';
@@ -14,6 +14,7 @@ interface ListMobileItemProps {
   underlyingAsset?: string;
   loading?: boolean;
   currentMarket?: CustomMarket;
+  noLink?: boolean;
 }
 
 export const ListMobileItem = ({
@@ -25,6 +26,7 @@ export const ListMobileItem = ({
   underlyingAsset,
   loading,
   currentMarket,
+  noLink,
 }: ListMobileItemProps) => {
   return (
     <Box>
@@ -41,23 +43,18 @@ export const ListMobileItem = ({
             </Box>
           ) : (
             symbol &&
-            underlyingAsset &&
             name &&
-            currentMarket &&
-            iconSymbol && (
-              <Link
-                href={ROUTES.reserveOverview(underlyingAsset, currentMarket)}
-                sx={{ display: 'inline-flex', alignItems: 'center' }}
-              >
-                <TokenIcon symbol={iconSymbol} sx={{ fontSize: '40px' }} />
-                <Box sx={{ ml: 2 }}>
-                  <Typography variant="h4">{name}</Typography>
-                  <Typography variant="subheader2" color="text.muted">
-                    {symbol}
-                  </Typography>
-                </Box>
-              </Link>
-            )
+            iconSymbol &&
+            (noLink ? (
+              <AssetTitle iconSymbol={iconSymbol} name={name} symbol={symbol} />
+            ) : (
+              underlyingAsset &&
+              currentMarket && (
+                <AddLink underlyingAsset={underlyingAsset} currentMarket={currentMarket}>
+                  <AssetTitle iconSymbol={iconSymbol} name={name} symbol={symbol} />
+                </AddLink>
+              )
+            ))
           )}
 
           {warningComponent}
@@ -68,3 +65,38 @@ export const ListMobileItem = ({
     </Box>
   );
 };
+
+interface AddLinkProps {
+  children: ReactNode;
+  underlyingAsset: string;
+  currentMarket: CustomMarket;
+}
+function AddLink({ children, underlyingAsset, currentMarket }: AddLinkProps): ReactElement {
+  return (
+    <Link
+      href={ROUTES.reserveOverview(underlyingAsset, currentMarket)}
+      sx={{ display: 'inline-flex', alignItems: 'center' }}
+    >
+      {children}
+    </Link>
+  );
+}
+
+interface AssetTitleItemProps {
+  symbol: string;
+  iconSymbol: string;
+  name: string;
+}
+function AssetTitle({ iconSymbol, name, symbol }: AssetTitleItemProps): ReactElement {
+  return (
+    <>
+      <TokenIcon symbol={iconSymbol} sx={{ fontSize: '40px' }} />
+      <Box sx={{ ml: 2 }}>
+        <Typography variant="h4">{name}</Typography>
+        <Typography variant="subheader2" color="text.muted">
+          {symbol}
+        </Typography>
+      </Box>
+    </>
+  );
+}
