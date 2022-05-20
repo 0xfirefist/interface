@@ -26,6 +26,7 @@ export const ListMobileItem = ({
   underlyingAsset,
   loading,
   currentMarket,
+  // added no link to not add link
   noLink,
 }: ListMobileItemProps) => {
   return (

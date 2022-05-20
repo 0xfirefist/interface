@@ -25,22 +25,24 @@ export const SupplyTransactionsList = () => {
   // note
   // const { jsonRpcProvider } = useProtocolDataContext();
   // I am not able to use jsonRpcProvider from protocol data context due to cors error.
-  // question - is this the same provider? if yes, why do you use a separate provider.
+  // QUESTION - is this the same provider as provider from web3context from usage point of view? if yes, why do you use a separate provider.
 
   const [loading, setLoading] = useState(false);
-  const [events, setEvents] = useState<Array<ParsedEvent>>();
+  const [events, setEvents] = useState<Array<ParsedEvent> | undefined | null>();
 
-  // support for mobile theme
+  // for a responsive view
   const theme = useTheme();
   const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
 
   useEffect(() => {
     (async () => {
       try {
+        // here is an assumption that at some point provider will definitely be available
         if (provider === undefined) return;
 
         setLoading(true);
         // pool on which to filter events
+        // QUESTION - eth, erc20 tokens different flow, why?
         const pool = currentMarketData.addresses.LENDING_POOL;
 
         // needed an abi to instantiate it
@@ -53,10 +55,12 @@ export const SupplyTransactionsList = () => {
 
         // query events using above filters
         const events = await pool_contract.queryFilter(filter);
+
+        // parsing the events before passing them to the list items
         const parsedEvents = await parseEvents(provider, events);
         setEvents(parsedEvents);
       } catch (err) {
-        console.log(err);
+        setEvents(null);
       } finally {
         setLoading(false);
       }
@@ -75,20 +79,13 @@ export const SupplyTransactionsList = () => {
       withTopMargin
       localStorageName="supplyAssetsTransactionHistoryTableCollapse"
     >
-      <>
-        {/* {!downToXSM && <ListHeader head={head} />}
-        {supplyReserves.map((item) =>
-          downToXSM ? (
-            <SupplyAssetsListMobileItem {...item} key={item.id} />
-          ) : (
-            <SupplyAssetsListItem {...item} key={item.id} />
-          )
-        )} */}
-
-        {!downToXSM && <ListHeader head={head} />}
-        {events === undefined ? (
+      {!downToXSM && <ListHeader head={head} />}
+      {events !== undefined &&
+        (events === null ? (
+          // error occurred handling it
           <DashboardContentNoData text={<Trans>Error fetching events</Trans>} />
         ) : events.length === 0 ? (
+          // no transaction history found
           <DashboardContentNoData text={<Trans>No transaction history</Trans>} />
         ) : (
           events.map((event) =>
@@ -98,8 +95,7 @@ export const SupplyTransactionsList = () => {
               <SupplyTransactionMobileListItem event={event} key={event.txhash} />
             )
           )
-        )}
-      </>
+        ))}
     </ListWrapper>
   );
 };
@@ -116,8 +112,9 @@ async function parseEvents(
   provider: JsonRpcProvider,
   events: Array<Event>
 ): Promise<Array<ParsedEvent>> {
-  const parsedEvents = await Promise.all(
+  return await Promise.all(
     events.map(async (event) => {
+      // erc20 address
       const underlyingAsset = event.args && event.args.reserve;
 
       // need to get the following details for a given asset
@@ -137,6 +134,4 @@ async function parseEvents(
       };
     })
   );
-
-  return parsedEvents;
 }

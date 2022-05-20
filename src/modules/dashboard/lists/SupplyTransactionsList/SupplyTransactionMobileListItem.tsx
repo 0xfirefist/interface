@@ -4,6 +4,7 @@ import { ListMobileItem } from 'src/components/lists/ListMobileItem';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { Row } from 'src/components/primitives/Row';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { dotify } from './SupplyTransactionListItem';
 import { ParsedEvent } from './SupplyTransactionsList';
 
 export const SupplyTransactionMobileListItem = ({ event }: { event: ParsedEvent }) => {
@@ -35,9 +36,3 @@ export const SupplyTransactionMobileListItem = ({ event }: { event: ParsedEvent 
     </ListMobileItem>
   );
 };
-
-function dotify(txHash: string, charSize: number): string {
-  return (
-    txHash.slice(0, charSize) + '....' + txHash.slice(txHash.length - charSize - 1, txHash.length)
-  );
-}

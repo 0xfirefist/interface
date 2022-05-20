@@ -41,7 +41,7 @@ export const SupplyTransactionListItem = ({ event }: { event: ParsedEvent }) => 
   );
 };
 
-function dotify(txHash: string, charSize: number): string {
+export function dotify(txHash: string, charSize: number): string {
   return (
     txHash.slice(0, charSize) + '....' + txHash.slice(txHash.length - charSize - 1, txHash.length)
   );
