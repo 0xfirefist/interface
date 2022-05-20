@@ -57,7 +57,7 @@ export const SupplyTransactionsList = () => {
         const events = await pool_contract.queryFilter(filter);
 
         // parsing the events before passing them to the list items
-        const parsedEvents = await parseEvents(provider, events.slice(-5));
+        const parsedEvents = await parseEvents(provider, events.slice(-5).reverse());
         setEvents(parsedEvents);
       } catch (err) {
         setEvents(null);
